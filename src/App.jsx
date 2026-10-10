@@ -30,7 +30,7 @@ function App() {
                 <ambientLight intensity={0.9} />
                 <Environment preset="city" />
 
-                <Physics debug>
+                <Physics>
                     <Arena
                         width={ARENA_WIDTH}
                         height={ARENA_HEIGHT}

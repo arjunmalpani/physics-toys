@@ -1,16 +1,34 @@
-# React + Vite
+# Physics Toys
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A small physics playground built with React Three Fiber and Rapier. Drop shapes into an arena and watch them fall, bounce and pile up.
 
-Currently, two official plugins are available:
+![Preview](./screenshots/preview.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Rapier physics: gravity, collisions, friction and bounce
+- Random boxes and balls spawn with their own size and bounciness
+- Colour shows bounciness, so you can read the physics by eye
+- Arena with a floor and walls, and a debug view of the colliders
+- Toy count capped at 60 (the oldest is removed)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech
 
-## Expanding the Oxlint configuration
+React, Vite, Three.js, @react-three/fiber, @react-three/drei, @react-three/rapier
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Run locally
+
+    npm install
+    npm run dev
+
+## Roadmap
+
+- [ ] Click a toy to launch it with an impulse
+- [ ] Goal zone and score counter
+- [ ] Deploy
+
+## What I'm learning
+
+- Dynamic vs fixed rigid bodies, and colliders vs meshes
+- Why physics objects own their position (not React state)
+- Sleeping bodies, and why a settled pile is cheap
