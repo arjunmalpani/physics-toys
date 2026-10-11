@@ -23,6 +23,7 @@ export default function Toy({ toy }) {
     return (
         <RigidBody
             ref={body}
+            userData={{ id: toy.id }}
             position={toy.position}
             restitution={toy.bounce}
             colliders={toy.shape === "ball" ? "ball" : "cuboid"}
