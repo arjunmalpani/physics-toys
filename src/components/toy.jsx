@@ -28,8 +28,9 @@ export default function Toy({ toy }) {
             restitution={toy.bounce}
             colliders={toy.shape === "ball" ? "ball" : "cuboid"}
             onClick={handleClick}
+
         >
-            <mesh>
+            <mesh castShadow>
                 {toy.shape === "ball" ? (
                     <sphereGeometry args={[toy.size, 32, 32]} />
                 ) : (
