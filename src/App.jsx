@@ -6,12 +6,12 @@ import { useState } from "react";
 import Toy from "./components/toy";
 import Goal from "./components/goal";
 import { useRef } from "react";
-
+import { v4 as uuidv4 } from "uuid";
 const rand = (min, max) => Math.random() * (max - min) + min;
 function makeToy() {
     const bounce = rand(0.1, 0.9);
     return {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         shape: Math.random() < 0.5 ? "ball" : "box",
         size: rand(0.4, 1),
         bounce,
