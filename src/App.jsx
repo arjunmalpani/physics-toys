@@ -3,6 +3,7 @@ import "./App.css";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { useState } from "react";
+import Toy from "./components/toy";
 
 const rand = (min, max) => Math.random() * (max - min) + min;
 function makeToy() {
@@ -37,44 +38,24 @@ function App() {
                         thickness={WALL_THICKNESS}
                     />
                     {toys.map((t) => (
-                        <RigidBody
-                            key={t.id}
-                            position={t.position}
-                            restitution={t.bounce}
-                            colliders={t.shape === "ball" ? "ball" : "cuboid"}
-                        >
-                            <mesh>
-                                {t.shape === "ball" ? (
-                                    <sphereGeometry args={[t.size, 32, 32]} />
-                                ) : (
-                                    <boxGeometry
-                                        args={[
-                                            t.size * 2,
-                                            t.size * 2,
-                                            t.size * 2,
-                                        ]}
-                                    />
-                                )}
-                                <meshStandardMaterial color={t.color} />
-                            </mesh>
-                        </RigidBody>
+                        <Toy key={t.id} toy={t} />
                     ))}
-                    <RigidBody
-                        position={[0, 5, 0]}
-                        rotation={[0.05, 0, 0]}
-                        restitution={1}
-                    >
-                        <mesh castShadow>
-                            <boxGeometry args={[2, 2, 2]} />
-                            <meshStandardMaterial color="royalblue" />
-                        </mesh>
-                    </RigidBody>
+                    <Toy
+                        toy={{
+                            id: "blue",
+                            shape: "box",
+                            size: 2,
+                            bounce: 1,
+                            color: "royalblue",
+                            position: [0, 5, 0],
+                        }}
+                    />
                 </Physics>
                 <OrbitControls />
             </Canvas>
             <button
                 onClick={addToy}
-                className="cursor-pointer absolute left-4 top-4 z-10 rounded bg-white/20 px-4 py-2 text-white"
+                className="cursor-pointer absolute left-4 top-4 z-10 rounded bg-text-h/10 px-4 py-2 text-text"
             >
                 Drop one ({toys.length}/60)
             </button>
@@ -112,9 +93,9 @@ function Arena({ width, height, thickness }) {
 function Wall({ position, args }) {
     return (
         <RigidBody position={position} type="fixed">
-            <mesh>
+            <mesh raycast={() => null}>
                 <boxGeometry args={args} />
-                <meshStandardMaterial color="black" transparent opacity={0.3} />
+                <meshStandardMaterial color="black" transparent opacity={0} />
             </mesh>
         </RigidBody>
     );
